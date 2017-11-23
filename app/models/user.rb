@@ -6,4 +6,7 @@ class User < ApplicationRecord
   validates :index, presence: true, length: { is: 6 }, uniqueness: true
   validates :name, presence: true, uniqueness: true, length: { in: 5..50 }
   validates :password, presence: true, length: { minimum: 6 }
+  def follows?(group)
+  self.groups.include?(group)
+  end
 end

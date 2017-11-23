@@ -1,9 +1,19 @@
-<h1>Strona główna</h1>
+<h1>Main page</h1>
 
-<ul>
-<% @users.each do |user| %>
-  <%= link_to user do %>
-    <li><%= user.name %> <%= user.index %></li>
+<% if logged_in? %>
+  <h2>My Groups</h2>
+  <% current_user.groups.each do |group| %>
+    <h3><%= group.name %></h3>
+    <% group.posts.each do |post| %>
+      <h4><%= post.title %> by <%= post.user.name %></h4>
+      <% post.comments.each do |post| %>
+        <p>
+          <%= comment.body %>
+        </p>
+        <h6>by <%= comment.user.name %></h6>
+      <% end %>
+    <% end %>
   <% end %>
+<% else %>
+  You are not logged in.
 <% end %>
-</ul>

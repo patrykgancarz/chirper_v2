@@ -10,5 +10,32 @@
   <%= @group.description %>
 </p>
 
+
+<% if logged_in? %>
+  <%= link_to( "Become a member", action: :follow) %>
+<% end %>
+
+<hr>
+<h1>Members</h1>
+<ul>
+<% @group.users.each do |user| %>
+  <li><%= link_to user.name, user %></li>
+<% end %>
+</ul>
+
+<hr>
+<% @group.posts.each do |post| %>
+  <h4><%= post.title %> by <%= post.user.name %></h4>
+  <% post.comments.each do |comment| %>
+    <p>
+      <%= comment.body %>
+    </p>
+    <h6>by <%= comment.user.name %></h6>
+  <% end %>
+<% end %>
+
+<hr>
+
+
 <%= link_to 'Edit', edit_group_path(@group) %> |
 <%= link_to 'Back', groups_path %>
