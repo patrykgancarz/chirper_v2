@@ -1,5 +1,5 @@
 class GroupsController < ApplicationController
-  before_action :set_group, only: [:show, :edit, :update, :destroy, :follow]
+  before_action :set_group, only: [:show, :edit, :update, :destroy, :follow, :unfollow]
 
   # GET /groups
   # GET /groups.json
@@ -22,7 +22,15 @@ class GroupsController < ApplicationController
   end
 
   def follow
-    current_user.groups.append(@group)
+    unless current_user.follows?(@group)
+      current_user.groups.append(@group)
+    end
+    redirect_to @group
+  end
+  def unfollow
+    if current_user.follows?(@group)
+      @group.users.delete(current_user)
+    end
     redirect_to @group
   end
 

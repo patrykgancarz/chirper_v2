@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
   get '/groups/:id/follow', to: 'groups#follow'
+  get '/groups/:id/unfollow', to: 'groups#unfollow'
 
   resources :comments
   resources :posts

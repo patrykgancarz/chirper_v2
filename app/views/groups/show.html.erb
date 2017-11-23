@@ -12,7 +12,11 @@
 
 
 <% if logged_in? %>
-  <%= link_to( "Become a member", action: :follow) %>
+  <% unless current_user.follows?(@group) %>
+    <%= link_to( "Add me to this group", action: :follow) %>
+  <% else %>
+    <%= link_to( "Remove me from this group", action: :unfollow) %>
+<% end %>
 <% end %>
 
 <hr>
