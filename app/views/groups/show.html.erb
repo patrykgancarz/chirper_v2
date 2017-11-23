@@ -28,17 +28,27 @@
 </ul>
 
 <hr>
-<% @group.posts.each do |post| %>
-  <h4><%= post.title %> by <%= post.user.name %></h4>
-  <% post.comments.each do |comment| %>
-    <p>
-      <%= comment.body %>
-    </p>
-    <h6>by <%= comment.user.name %></h6>
+<h1>Latest posts</h1>
+<% if @group.posts.length == 0 %>
+  Create the first post!
+<% else %>
+  <% @group.posts.each do |post| %>
+    <%= link_to [@group, post] do %>
+    <h4><%= post.title %> by <%= post.user.name %></h4>
+    <% end %>
+    <% post.comments.each do |comment| %>
+      <p>
+        <%= comment.body %>
+      </p>
+      <h6>by <%= comment.user.name %></h6>
+    <% end %>
   <% end %>
 <% end %>
-
 <hr>
+
+<% if logged_in? && current_user.follows?(@group) %>
+  <%= link_to "Write what's on your mind!", new_group_post_path(@group) %>
+<% end %>
 
 
 <%= link_to 'Edit', edit_group_path(@group) %> |
