@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy, :follow, :unfollow]
-
+ swagger_controller :courses, 'Courses'
   # GET /groups
   # GET /groups.json
   def index
@@ -21,6 +21,11 @@ class GroupsController < ApplicationController
   def edit
   end
 
+  swagger_api :follow do
+    summary 'Follows a group'
+    notes 'Notes...'
+    param :path, :id, :integer, :required, "Group id"
+  end
   def follow
     unless current_user.follows?(@group)
       current_user.groups.append(@group)

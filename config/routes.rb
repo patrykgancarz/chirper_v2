@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   delete '/logout',  to: 'sessions#destroy'
   get '/groups/:id/follow', to: 'groups#follow'
   get '/groups/:id/unfollow', to: 'groups#unfollow'
+  get '/api' => redirect('/swagger/dist/index.html?url=/api-docs.json')
 
   resources :comments
   resources :posts
