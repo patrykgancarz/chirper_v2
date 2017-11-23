@@ -1,0 +1,9 @@
+<h1>Strona główna</h1>
+
+<ul>
+<% @users.each do |user| %>
+  <%= link_to user do %>
+    <li><%= user.name %> <%= user.index %></li>
+  <% end %>
+<% end %>
+</ul>
