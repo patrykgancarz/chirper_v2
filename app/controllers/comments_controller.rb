@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
-
+  swagger_controller	:posts,	'Posts'
   # GET /comments
   # GET /comments.json
   def index
@@ -9,6 +9,13 @@ class CommentsController < ApplicationController
 
   # GET /comments/1
   # GET /comments/1.json
+  swagger_api	:show	do
+    summary	'Returns	one	comment'
+    param	:path,	:group_id,	:integer,	:required,	"Group	id"
+    param	:path,	:post_id,	:integer,	:required,	"Post	id"
+    param	:path,	:id,	:integer,	:required,	"Post	id"
+    notes	'Notes...'
+  end
   def show
   end
 
@@ -25,6 +32,13 @@ class CommentsController < ApplicationController
 
   # POST /comments
   # POST /comments.json
+  swagger_api	:create	do
+    summary	"Create	new	comment"
+    param	:header,	"Authorization",	:string,	:required,	"Authentication	token"
+    param	:path,	:group_id,	:integer,	:required,	"Group	id"
+    param	:path,	:post_id,	:integer,	:required,	"Post	id"
+    param	:form,	"comment[body]",	:string,	:required,	"Body	of	a	comment"
+  end
   def create
     @group = Group.find(params[:group_id])
     @post = Post.find(params[:post_id])
@@ -44,6 +58,13 @@ class CommentsController < ApplicationController
 
   # PATCH/PUT /comments/1
   # PATCH/PUT /comments/1.json
+  swagger_api	:update	do
+    summary	"Update	a	comment"
+    param	:path,	:id,	:integer,	:required,	"Comment	id"
+    param	:path,	:post_id,	:integer,	:required,	"Post	id"
+    param	:path,	:group_id,	:integer,	:required,	"Group	id"
+    param	:form,	"comment[body]",	:string,	:required,	"Body	of	a	comment"
+  end
   def update
     respond_to do |format|
       if @comment.update(post_params)
@@ -58,6 +79,13 @@ class CommentsController < ApplicationController
 
   # DELETE /comments/1
   # DELETE /comments/1.json
+  swagger_api	:destroy	do	|post|
+    summary	'Destroys	a	comment'
+    param	:path,	:id,	:integer,	:required,	"Comment	id"
+    param	:path,	:post_id,	:integer,	:required,	"Post	id"
+    param	:path,	:group_id,	:integer,	:required,	"Group	id"
+    notes	'Notes...'
+  end
   def destroy
     @comment.destroy
     respond_to do |format|

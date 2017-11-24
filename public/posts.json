@@ -1,0 +1,101 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "http://localhost:3000",
+  "resourcePath": "posts",
+  "apis": [
+    {
+      "path": "/posts",
+      "operations": [
+        {
+          "summary": "Create\tnew\tpost",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication\ttoken",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "post[title]",
+              "type": "string",
+              "description": "Title\tof\ta\tpost",
+              "required": true
+            }
+          ],
+          "nickname": "Posts#create",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/posts/{id}",
+      "operations": [
+        {
+          "summary": "Returns\tone\tpost",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Post\tid",
+              "required": true
+            }
+          ],
+          "notes": "Notes...",
+          "nickname": "Posts#show",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/posts/{id}",
+      "operations": [
+        {
+          "summary": "Update\ta\tpost",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Post\tid",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "post[title]",
+              "type": "string",
+              "description": "Post\ttitle",
+              "required": true
+            }
+          ],
+          "nickname": "Posts#update",
+          "method": "patch"
+        }
+      ]
+    },
+    {
+      "path": "/posts/{id}",
+      "operations": [
+        {
+          "summary": "Destroys\ta\tpost",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Post\tid",
+              "required": true
+            }
+          ],
+          "notes": "Notes...",
+          "nickname": "Posts#destroy",
+          "method": "delete"
+        }
+      ]
+    }
+  ],
+  "authorizations": null
+}

@@ -4,8 +4,20 @@
   "basePath": "http://localhost:3000",
   "apis": [
     {
+      "path": "/sessions.{format}",
+      "description": "Authentication"
+    },
+    {
       "path": "/groups.{format}",
-      "description": "Courses"
+      "description": "Groups"
+    },
+    {
+      "path": "/comments.{format}",
+      "description": "Posts"
+    },
+    {
+      "path": "/posts.{format}",
+      "description": "Posts"
     },
     {
       "path": "/users.{format}",

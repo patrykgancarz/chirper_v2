@@ -9,8 +9,14 @@
       "operations": [
         {
           "summary": "Follows a group",
-          "notes": "Notes...",
           "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication\ttoken",
+              "required": true
+            },
             {
               "paramType": "path",
               "name": "id",
@@ -19,8 +25,146 @@
               "required": true
             }
           ],
+          "notes": "Notes...",
           "nickname": "Groups#follow",
           "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/groups/{id}/unfollow",
+      "operations": [
+        {
+          "summary": "Unfollows\ta\tgroup",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication\ttoken",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Group\tid",
+              "required": true
+            }
+          ],
+          "notes": "Notes...",
+          "nickname": "Groups#unfollow",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/groups",
+      "operations": [
+        {
+          "summary": "Returns\tall\tgroups",
+          "notes": "Notes...",
+          "nickname": "Groups#index",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/groups",
+      "operations": [
+        {
+          "summary": "Create\ta\tgroup",
+          "parameters": [
+            {
+              "paramType": "form",
+              "name": "group[name]",
+              "type": "string",
+              "description": "Group\tname",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "group[description]",
+              "type": "string",
+              "description": "Group\tdescription",
+              "required": true
+            }
+          ],
+          "nickname": "Groups#create",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/groups/{id}",
+      "operations": [
+        {
+          "summary": "Returns\tone\tgroup",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Group\tid",
+              "required": true
+            }
+          ],
+          "notes": "Notes...",
+          "nickname": "Groups#show",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/groups/{id}",
+      "operations": [
+        {
+          "summary": "Update\ta\tgroup",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Course\tid",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "group[name]",
+              "type": "string",
+              "description": "Group\tname",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "group[description]",
+              "type": "string",
+              "description": "Group\tdescription",
+              "required": true
+            }
+          ],
+          "nickname": "Groups#update",
+          "method": "patch"
+        }
+      ]
+    },
+    {
+      "path": "/groups/{id}",
+      "operations": [
+        {
+          "summary": "Destroys\ta\tgroup",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Group\tid",
+              "required": true
+            }
+          ],
+          "notes": "Notes...",
+          "nickname": "Groups#destroy",
+          "method": "delete"
         }
       ]
     }

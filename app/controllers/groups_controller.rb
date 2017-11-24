@@ -1,14 +1,52 @@
 class GroupsController < ApplicationController
+ swagger_controller :groups, 'Groups'
   before_action :set_group, only: [:show, :edit, :update, :destroy, :follow, :unfollow]
- swagger_controller :courses, 'Courses'
+
+
+ swagger_api :follow do
+   summary 'Follows a group'
+   notes 'Notes...'
+   param	:header,	"Authorization",	:string,	:required,	"Authentication	token"
+   param :path, :id, :integer, :required, "Group id"
+ end
+ def follow
+   unless current_user.follows?(@group)
+     current_user.groups.append(@group)
+   end
+   redirect_to @group
+ end
+
+ swagger_api	:unfollow	do
+   summary	'Unfollows	a	group'
+   notes	'Notes...'
+   param	:header,	"Authorization",	:string,	:required,	"Authentication	token"
+   param	:path,	:id,	:integer,	:required,	"Group	id"
+ end
+ def unfollow
+   if current_user.follows?(@group)
+     @group.users.delete(current_user)
+   end
+   redirect_to @group
+ end
+
+
   # GET /groups
   # GET /groups.json
+  swagger_api	:index	do
+    summary	'Returns	all	groups'
+    notes	'Notes...'
+  end
   def index
     @groups = Group.all
   end
 
   # GET /groups/1
   # GET /groups/1.json
+  swagger_api	:show	do
+    summary	'Returns	one	group'
+    param	:path,	:id,	:integer,	:required,	"Group	id"
+    notes	'Notes...'
+  end
   def show
   end
 
@@ -21,26 +59,14 @@ class GroupsController < ApplicationController
   def edit
   end
 
-  swagger_api :follow do
-    summary 'Follows a group'
-    notes 'Notes...'
-    param :path, :id, :integer, :required, "Group id"
-  end
-  def follow
-    unless current_user.follows?(@group)
-      current_user.groups.append(@group)
-    end
-    redirect_to @group
-  end
-  def unfollow
-    if current_user.follows?(@group)
-      @group.users.delete(current_user)
-    end
-    redirect_to @group
-  end
 
   # POST /groups
   # POST /groups.json
+  swagger_api	:create	do
+    summary	"Create	a	group"
+    param	:form,	"group[name]",	:string,	:required,	"Group	name"
+    param	:form,	"group[description]",	:string,	:required,	"Group	description"
+  end
   def create
     @group = Group.new(group_params)
 
@@ -57,6 +83,12 @@ class GroupsController < ApplicationController
 
   # PATCH/PUT /groups/1
   # PATCH/PUT /groups/1.json
+  swagger_api	:update	do
+    summary	"Update	a	group"
+    param	:path,	:id,	:integer,	:required,	"Course	id"
+    param	:form,	"group[name]",	:string,	:required,	"Group	name"
+    param	:form,	"group[description]",	:string,	:required,	"Group	description"
+  end
   def update
     respond_to do |format|
       if @group.update(group_params)
@@ -71,6 +103,11 @@ class GroupsController < ApplicationController
 
   # DELETE /groups/1
   # DELETE /groups/1.json
+  swagger_api	:destroy	do
+    summary	'Destroys	a	group'
+    param	:path,	:id,	:integer,	:required,	"Group	id"
+    notes	'Notes...'
+  end
   def destroy
     @group.destroy
     respond_to do |format|

@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-
+  swagger_controller	:posts,	'Posts'
   # GET /posts
   # GET /posts.json
   def index
@@ -9,6 +9,12 @@ class PostsController < ApplicationController
 
   # GET /posts/1
   # GET /posts/1.json
+  swagger_api	:show	do
+    summary	'Returns	one	post'
+    param	:path,	:group_id,	:integer,	:required,	"Group	id"
+    param	:path,	:id,	:integer,	:required,	"Post	id"
+    notes	'Notes...'
+  end
   def show
   end
 
@@ -28,6 +34,12 @@ class PostsController < ApplicationController
 
   # POST /posts
   # POST /posts.json
+  swagger_api	:create	do
+		summary	"Create	new	post"
+		param	:header,	"Authorization",	:string,	:required,	"Authentication	token"
+		param	:path,	:group_id,	:integer,	:required,	"Group	id"
+		param	:form,	"post[title]",	:string,	:required,	"Title	of	a	post"
+	end
   def create
     @group = Group.find(params[:group_id])
     @post = @group.posts.new(post_params)
@@ -46,6 +58,12 @@ class PostsController < ApplicationController
 
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
+  swagger_api	:update	do
+    summary	"Update	a	post"
+    param	:path,	:id,	:integer,	:required,	"Post	id"
+    param	:path,	:group_id,	:integer,	:required,	"Group	id"
+    param	:form,	"post[title]",	:string,	:required,	"Post	title"
+  end
   def update
     respond_to do |format|
       if @post.update(post_params)
@@ -60,6 +78,12 @@ class PostsController < ApplicationController
 
   # DELETE /posts/1
   # DELETE /posts/1.json
+  swagger_api	:destroy	do
+    summary	'Destroys	a	post'
+    param	:path,	:id,	:integer,	:required,	"Post	id"
+    param	:path,	:group_id,	:integer,	:required,	"Group	id"
+    notes	'Notes...'
+  end
   def destroy
     @post.destroy
     respond_to do |format|
