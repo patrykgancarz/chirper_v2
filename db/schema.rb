@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171123040159) do
+ActiveRecord::Schema.define(version: 20180111042422) do
 
   create_table "comments", force: :cascade do |t|
     t.string "body"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20171123040159) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "password_digest"
+    t.string "token"
     t.index ["index"], name: "index_users_on_index", unique: true
   end
 

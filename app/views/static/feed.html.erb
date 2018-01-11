@@ -1,0 +1,15 @@
+<ul>
+<% for group in current_user.groups do %>
+  <li><%= group.name %></li>
+  <ul>
+  <% for post in group.posts do %>
+    <li><%= post.title %></li>
+    <ul>
+      <% for comment in post.comments %>
+        <li><%= comment.body %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  </ul>
+<% end %>
+</ul>

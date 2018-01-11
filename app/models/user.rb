@@ -9,4 +9,8 @@ class User < ApplicationRecord
   def follows?(group)
   self.groups.include?(group)
   end
+  has_secure_token
+  def invalidate_token
+    self.update_columns(token: nil)
+  end
 end
