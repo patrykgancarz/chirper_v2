@@ -4,6 +4,10 @@
   "basePath": "http://localhost:3000",
   "apis": [
     {
+      "path": "/static.{format}",
+      "description": "Static"
+    },
+    {
       "path": "/sessions.{format}",
       "description": "Authentication"
     },
@@ -12,21 +16,21 @@
       "description": "Groups"
     },
     {
+      "path": "/users.{format}",
+      "description": "Users"
+    },
+    {
       "path": "/comments.{format}",
       "description": "Posts"
     },
     {
       "path": "/posts.{format}",
       "description": "Posts"
-    },
-    {
-      "path": "/users.{format}",
-      "description": "Users"
     }
   ],
   "authorizations": null,
   "info": {
     "title": "Chirper",
-    "description": "Aplikacja Mobilna"
+    "description": "Aplikacja"
   }
 }

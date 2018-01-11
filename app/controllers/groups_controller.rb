@@ -1,7 +1,8 @@
 class GroupsController < ApplicationController
- swagger_controller :groups, 'Groups'
+  skip_before_action :verify_authenticity_token
   before_action :set_group, only: [:show, :edit, :update, :destroy, :follow, :unfollow]
-
+  before_action :require_token, only: [:follow, :unfollow]
+  swagger_controller :groups, 'Groups'
 
  swagger_api :follow do
    summary 'Follows a group'

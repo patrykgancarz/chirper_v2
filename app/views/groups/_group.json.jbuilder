@@ -7,6 +7,6 @@ json.posts	group.posts	do	|post|
 		json.comments	post.comments	do	|comment|
 				json.id	comment.id
 				json.body	comment.body
-				json.user_id	comment.user.id
+				json.user_id comment.user.id
 		end
 end

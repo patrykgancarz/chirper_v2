@@ -5,7 +5,7 @@
   "resourcePath": "comments",
   "apis": [
     {
-      "path": "/comments",
+      "path": "/groups/{group_id}/posts/{post_id}/comments",
       "operations": [
         {
           "summary": "Create\tnew\tcomment",
@@ -15,6 +15,20 @@
               "name": "Authorization",
               "type": "string",
               "description": "Authentication\ttoken",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "group_id",
+              "type": "integer",
+              "description": "Group\tid",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "post_id",
+              "type": "integer",
+              "description": "Post\tid",
               "required": true
             },
             {
@@ -31,16 +45,30 @@
       ]
     },
     {
-      "path": "/comments/{id}",
+      "path": "/groups/{group_id}/posts/{post_id}/comments/{id}",
       "operations": [
         {
           "summary": "Returns\tone\tcomment",
           "parameters": [
             {
               "paramType": "path",
-              "name": "id",
+              "name": "group_id",
+              "type": "integer",
+              "description": "Group\tid",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "post_id",
               "type": "integer",
               "description": "Post\tid",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Comment\tid",
               "required": true
             }
           ],
@@ -51,7 +79,7 @@
       ]
     },
     {
-      "path": "/comments/{id}",
+      "path": "/groups/{group_id}/posts/{post_id}/comments/{id}",
       "operations": [
         {
           "summary": "Update\ta\tcomment",
@@ -61,6 +89,20 @@
               "name": "id",
               "type": "integer",
               "description": "Comment\tid",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "post_id",
+              "type": "integer",
+              "description": "Post\tid",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "group_id",
+              "type": "integer",
+              "description": "Group\tid",
               "required": true
             },
             {
@@ -77,7 +119,7 @@
       ]
     },
     {
-      "path": "/comments/{id}",
+      "path": "/groups/{group_id}/posts/{post_id}/comments/{id}",
       "operations": [
         {
           "summary": "Destroys\ta\tcomment",
@@ -87,6 +129,20 @@
               "name": "id",
               "type": "integer",
               "description": "Comment\tid",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "post_id",
+              "type": "integer",
+              "description": "Post\tid",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "group_id",
+              "type": "integer",
+              "description": "Group\tid",
               "required": true
             }
           ],

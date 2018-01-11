@@ -1,11 +1,8 @@
 class CommentsController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
+  before_action :require_token, only: [:create]
   swagger_controller	:posts,	'Posts'
-  # GET /comments
-  # GET /comments.json
-  def index
-    @comments = Comment.all
-  end
 
   # GET /comments/1
   # GET /comments/1.json
@@ -13,7 +10,7 @@ class CommentsController < ApplicationController
     summary	'Returns	one	comment'
     param	:path,	:group_id,	:integer,	:required,	"Group	id"
     param	:path,	:post_id,	:integer,	:required,	"Post	id"
-    param	:path,	:id,	:integer,	:required,	"Post	id"
+    param	:path,	:id,	:integer,	:required,	"Comment	id"
     notes	'Notes...'
   end
   def show
@@ -48,7 +45,7 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.save
         format.html { redirect_to [@group, @post], notice: 'Comment was successfully created.' }
-        format.json { render :show, status: :created, location: @comment }
+        format.json { render :show, status: :created }
       else
         format.html { render :new }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
@@ -67,9 +64,9 @@ class CommentsController < ApplicationController
   end
   def update
     respond_to do |format|
-      if @comment.update(post_params)
+      if @comment.update(comment_params)
         format.html { redirect_to [@group, @post], notice: 'Comment was successfully updated.' }
-        format.json { render :show, status: :ok, location: @post }
+        format.json { render :show, status: :ok }
       else
         format.html { render :edit }
         format.json { render json: @post.errors, status: :unprocessable_entity }

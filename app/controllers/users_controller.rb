@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
+  swagger_controller :users, 'Users'
   # GET /users
   # GET /users.json
   swagger_api :index do
@@ -30,7 +32,7 @@ class UsersController < ApplicationController
   def edit
   end
 
-  swagger_controller :users, 'Users'
+
 
   # POST /users
   # POST /users.json

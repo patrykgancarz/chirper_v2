@@ -10,15 +10,13 @@ Rails.application.routes.draw do
   get '/api' => redirect('/swagger/dist/index.html?url=/api-docs.json')
   get '/feed', to: 'static#feed'
 
-  resources :comments
-  resources :posts
-  resources :groups
+
   resources :users
   resources :groups do
-  resources :posts, only: [:new, :create, :edit, :update, :show, :destroy] do
-    resources :comments, only: [:new, :create, :edit, :update, :show, :destroy]
+    resources :posts, only: [:new, :create, :edit, :update, :show, :destroy] do
+      resources :comments, only: [:new, :create, :edit, :update, :show, :destroy]
+    end
   end
-end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

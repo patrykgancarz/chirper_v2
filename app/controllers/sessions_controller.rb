@@ -1,6 +1,9 @@
 class SessionsController < ApplicationController
   skip_before_action :verify_authenticity_token
   swagger_controller	:session,	"Authentication"
+  before_action :require_token, only: [:destroy]
+  def new
+  end
   swagger_api	:create	do
     summary	"Gather	a	token"
     param	:form,	"session[index]",	:string,	:required,	"Users	index"

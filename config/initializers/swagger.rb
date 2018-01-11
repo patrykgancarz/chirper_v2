@@ -8,7 +8,7 @@ Swagger::Docs::Config.register_apis({
     :attributes => {
       :info => {
         "title" => "Chirper",
-        "description" => "Aplikacja Mobilna"
+        "description" => "Aplikacja"
       }
     }
   }

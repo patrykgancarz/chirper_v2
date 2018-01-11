@@ -1,11 +1,8 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  skip_before_action :verify_authenticity_token
+  before_action :require_token, only: [:create]
   swagger_controller	:posts,	'Posts'
-  # GET /posts
-  # GET /posts.json
-  def index
-    @posts = Post.all
-  end
 
   # GET /posts/1
   # GET /posts/1.json
@@ -20,7 +17,8 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-    @post = Post.new
+    @group = Group.find(params[:group_id])
+    @post = @group.posts.new
   end
 
   # GET /posts/1/edit
@@ -37,8 +35,8 @@ class PostsController < ApplicationController
   swagger_api	:create	do
 		summary	"Create	new	post"
 		param	:header,	"Authorization",	:string,	:required,	"Authentication	token"
-		param	:path,	:group_id,	:integer,	:required,	"Group	id"
-		param	:form,	"post[title]",	:string,	:required,	"Title	of	a	post"
+		param	:path,	:group_id, :integer, :required,	"Group	id"
+		param	:form,	"post[title]",	:string,	:required,	"Body	of	a	post"
 	end
   def create
     @group = Group.find(params[:group_id])
@@ -68,7 +66,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.update(post_params)
         format.html { redirect_to [@group, @post], notice: 'Post was successfully updated.' }
-        format.json { render :show, status: :ok, location: @post }
+        format.json { render :show, status: :ok }
       else
         format.html { render :edit }
         format.json { render json: @post.errors, status: :unprocessable_entity }

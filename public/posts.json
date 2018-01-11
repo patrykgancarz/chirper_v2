@@ -5,7 +5,7 @@
   "resourcePath": "posts",
   "apis": [
     {
-      "path": "/posts",
+      "path": "/groups/{group_id}/posts",
       "operations": [
         {
           "summary": "Create\tnew\tpost",
@@ -18,10 +18,17 @@
               "required": true
             },
             {
+              "paramType": "path",
+              "name": "group_id",
+              "type": "integer",
+              "description": "Group\tid",
+              "required": true
+            },
+            {
               "paramType": "form",
               "name": "post[title]",
               "type": "string",
-              "description": "Title\tof\ta\tpost",
+              "description": "Body\tof\ta\tpost",
               "required": true
             }
           ],
@@ -31,11 +38,18 @@
       ]
     },
     {
-      "path": "/posts/{id}",
+      "path": "/groups/{group_id}/posts/{id}",
       "operations": [
         {
           "summary": "Returns\tone\tpost",
           "parameters": [
+            {
+              "paramType": "path",
+              "name": "group_id",
+              "type": "integer",
+              "description": "Group\tid",
+              "required": true
+            },
             {
               "paramType": "path",
               "name": "id",
@@ -51,7 +65,7 @@
       ]
     },
     {
-      "path": "/posts/{id}",
+      "path": "/groups/{group_id}/posts/{id}",
       "operations": [
         {
           "summary": "Update\ta\tpost",
@@ -61,6 +75,13 @@
               "name": "id",
               "type": "integer",
               "description": "Post\tid",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "group_id",
+              "type": "integer",
+              "description": "Group\tid",
               "required": true
             },
             {
@@ -77,7 +98,7 @@
       ]
     },
     {
-      "path": "/posts/{id}",
+      "path": "/groups/{group_id}/posts/{id}",
       "operations": [
         {
           "summary": "Destroys\ta\tpost",
@@ -87,6 +108,13 @@
               "name": "id",
               "type": "integer",
               "description": "Post\tid",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "group_id",
+              "type": "integer",
+              "description": "Group\tid",
               "required": true
             }
           ],
